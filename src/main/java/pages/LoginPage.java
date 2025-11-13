@@ -6,12 +6,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.testng.annotations.Listeners;
+import utils.TestNGListener;
 
+
+@Listeners(TestNGListener.class)
 public class LoginPage extends BasePage{
-    public LoginPage (WebDriver driver){
-        PageFactory.initElements
-                (new AjaxElementLocatorFactory(driver,10),this);
+    public LoginPage(WebDriver driver){
+        setDriver(driver);
+        PageFactory.initElements(
+                new AjaxElementLocatorFactory(driver, 10), this);
     }
+
     @FindBy(id = "email")
     WebElement inputEmail;
 
@@ -24,12 +30,10 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//h2[text()='Logged in success']")
     WebElement popUpTextLoggedSuccess;
 
-    @FindBy(xpath ="//h2[contains(text(),'Login or Password incorrect')]" )
+    @FindBy(xpath = "//h2[contains(text(),'Login or Password incorrect')]")
     WebElement popUpTextLoggedIncorrect;
 
-    //h2[text()='"Login or Password incorrect"']
-
-    public void typeLoginForm (User user){
+    public void typeLoginForm(User user){
         inputEmail.sendKeys(user.getUsername());
         inputPassword.sendKeys(user.getPassword());
         btnYalla.click();

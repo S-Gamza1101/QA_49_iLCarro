@@ -7,10 +7,18 @@ import org.openqa.selenium.support.events.WebDriverListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 public class WDListener implements WebDriverListener {
 
     Logger logger = LoggerFactory.getLogger(WDListener.class);
 
+    @Override
+    public void onError(Object target, Method method, Object[] args, InvocationTargetException e) {
+        WebDriverListener.super.onError(target, method, args, e);
+        logger.error("created exception {}", e.toString());
+    }
 
     @Override
     public void afterGet(WebDriver driver, String url) {
@@ -21,7 +29,7 @@ public class WDListener implements WebDriverListener {
     @Override
     public void beforeFindElement(WebDriver driver, By locator) {
         WebDriverListener.super.beforeFindElement(driver, locator);
-        logger.info("find element with locator  {}", locator);
+        logger.info("find element with locator {}", locator);
     }
 
     @Override
@@ -39,12 +47,12 @@ public class WDListener implements WebDriverListener {
     @Override
     public void afterClick(WebElement element) {
         WebDriverListener.super.afterClick(element);
-        logger.info("after click to elment {}", element.getTagName());
+        logger.info("after click to element {}", element.getTagName());
     }
 
     @Override
     public void afterSendKeys(WebElement element, CharSequence... keysToSend) {
         WebDriverListener.super.afterSendKeys(element, keysToSend);
-        logger.info("use sendKeys to elment {} {}", element.getTagName(), keysToSend);
+        logger.info("use sendKeys to element {} type {}", element.getTagName(), keysToSend);
     }
 }

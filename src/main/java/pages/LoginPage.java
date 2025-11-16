@@ -6,11 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-import org.testng.annotations.Listeners;
-import utils.TestNGListener;
 
-
-@Listeners(TestNGListener.class)
 public class LoginPage extends BasePage{
     public LoginPage(WebDriver driver){
         setDriver(driver);

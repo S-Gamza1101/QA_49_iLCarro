@@ -9,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 public class SignUpPage extends BasePage{
-
     public SignUpPage(WebDriver driver){
         setDriver(driver);
         PageFactory.initElements(

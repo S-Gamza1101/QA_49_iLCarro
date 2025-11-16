@@ -1,18 +1,20 @@
 package ui_tests;
 
+import data_provider.Sign_Up_DP;
 import dto.User;
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.SignUpPage;
+import utils.TestNGListener;
 
-import static utils.UserFactory.positiveUser;
+import static utils.UserFactory.*;
 
+@Listeners(TestNGListener.class)
 public class SignUpTests extends ApplicationManager {
-
-
 
     SignUpPage signUpPage;
 
@@ -26,6 +28,15 @@ public class SignUpTests extends ApplicationManager {
     public void registrationPositiveTest(){
         User user = positiveUser();
         signUpPage.typeLoginForm(user);
+        signUpPage.clickCheckBoxWithActions();
+        signUpPage.clickBtnYalla();
+        Assert.assertTrue(signUpPage.isTextDialogContainerPresent());
+    }
+
+
+    @Test(dataProvider = "dataProviderUserFile", dataProviderClass = Sign_Up_DP.class)
+    public void registrationPositiveTest_withDataProvider(User user1){
+        signUpPage.typeLoginForm(user1);
         signUpPage.clickCheckBoxWithActions();
         signUpPage.clickBtnYalla();
         Assert.assertTrue(signUpPage.isTextDialogContainerPresent());
